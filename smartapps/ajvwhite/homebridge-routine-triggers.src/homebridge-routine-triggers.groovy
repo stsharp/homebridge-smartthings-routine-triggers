@@ -48,10 +48,12 @@ preferences {
 }
 
 def copyConfig() {
+    def redirectUrl = "https://graph.api.smartthings.com/oauth/initialize?appId=${app.id}&access_token=${state.accessToken}&apiServerUrl=${getApiServerUrl()}"
+    //"https://graph.api.smartthings.com:443/api/smartapps/installations/${app.id}/config?access_token=${state.accessToken}"
     dynamicPage(name: "copyConfig", title: "Config", install:true, uninstall:true) {
         section() {
             paragraph "Copy/Paste the below into your homebridge's config.json to create HomeKit accessories for your SmartThing Routines"
-            href url:"https://graph.api.smartthings.com:443/api/smartapps/installations/${app.id}/config?access_token=${state.accessToken}", style:"embedded", required:false, title:"Config", description:"Tap, select, copy, then click \"Done\""
+            href url: redirectUrl, style:"embedded", required:false, title:"Config", description:"Tap, select, copy, then click \"Done\""
         }
     }
 }
